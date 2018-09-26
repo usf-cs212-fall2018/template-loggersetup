@@ -9,9 +9,8 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 
 /*
  * NOTE:
@@ -26,26 +25,26 @@ import org.junit.jupiter.api.Test;
 
 public class LoggerSetupTest {
 
-	private ByteArrayOutputStream capture;
+	private static ByteArrayOutputStream capture = null;
 
-	@BeforeEach
-	public void setup() throws IOException {
+	@BeforeAll
+	public static void setup() throws IOException {
 		// delete any old debug files
 		Files.deleteIfExists(Paths.get("debug.log"));
 
 		// capture all system console output
 		PrintStream original = System.out;
-		this.capture = new ByteArrayOutputStream();
-		System.setOut(new PrintStream(this.capture));
+		capture = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(capture));
 
-		// run logMessages() only ONCE to avoid duplicate entries
+		// run main() only ONCE to avoid duplicate entries
 		// and shutdown log manager to flush the debug files
-		LoggerSetup.logMessages();
+		LoggerSetup.main(null);
 		LogManager.shutdown();
 
 		// restore system.out
 		System.setOut(original);
-		System.out.println(this.capture.toString());
+		System.out.println(capture.toString());
 	}
 
 	@Test
@@ -70,42 +69,42 @@ public class LoggerSetupTest {
 	@Test
 	public void testExceptionOutput() throws IOException {
 		// tests your console output looks right
-		assertFalse(this.capture.toString().contains("java.lang.Exception"));
+		assertFalse(capture.toString().contains("java.lang.Exception"));
 	}
 
 	@Test
 	public void testLevelOutput1() {
 		// tests your console output looks right
-		assertFalse(this.capture.toString().contains("dodo"));
+		assertFalse(capture.toString().contains("dodo"));
 	}
 
 	@Test
 	public void testLevelOutput2() {
 		// tests your console output looks right
-		assertFalse(this.capture.toString().contains("tucan"));
+		assertFalse(capture.toString().contains("tucan"));
 	}
 
 	@Test
 	public void testLevelOutput3() {
 		// tests your console output looks right
-		assertTrue(this.capture.toString().contains("ibis"));
+		assertTrue(capture.toString().contains("ibis"));
 	}
 
 	@Test
 	public void testLevelOutput4() {
 		// tests your console output looks right
-		assertTrue(this.capture.toString().contains("wren"));
+		assertTrue(capture.toString().contains("wren"));
 	}
 
 	@Test
 	public void testLevelOutput5() {
 		// tests your console output looks right
-		assertTrue(this.capture.toString().contains("egret urk"));
+		assertTrue(capture.toString().contains("egret urk"));
 	}
 
 	@Test
 	public void testLevelOutput6() {
 		// tests your console output looks right
-		assertTrue(this.capture.toString().contains("finch ack"));
+		assertTrue(capture.toString().contains("finch ack"));
 	}
 }

@@ -22,16 +22,16 @@ The console output includes the log message (like `egret`), if appropriate the e
 Log `ALL` log levels to a `debug.log` file. See the `test/debug.log` file for the expected file output. It is also included below:
 
 ```
-[1 TR] Log4j2Setup.logMessages main: tucan 
-[2 DE] Log4j2Setup.logMessages main: dodo 
-[3 IN] Log4j2Setup.logMessages main: ibis 
-[4 WA] Log4j2Setup.logMessages main: wren 
-[5 ER] Log4j2Setup.logMessages main: egret java.lang.Exception: urk
-	at Log4j2Setup.logMessages(Log4j2Setup.java:13)
-	at Log4j2SetupTest.setup(Log4j2SetupTest.java:40)
-[6 FA] Log4j2Setup.logMessages main: finch java.lang.Exception: ack
-	at Log4j2Setup.logMessages(Log4j2Setup.java:14)
-	at Log4j2SetupTest.setup(Log4j2SetupTest.java:40)
+[1 TR] LoggerSetup.main main: tucan 
+[2 DE] LoggerSetup.main main: dodo 
+[3 IN] LoggerSetup.main main: ibis 
+[4 WA] LoggerSetup.main main: wren 
+[5 ER] LoggerSetup.main main: egret java.lang.Exception: urk
+    at LoggerSetup.main(LoggerSetup.java:13)
+    at LoggerSetupTest.setup(LoggerSetupTest.java:42)
+[6 FA] LoggerSetup.main main: finch java.lang.Exception: ack
+    at LoggerSetup.main(LoggerSetup.java:14)
+    at LoggerSetupTest.setup(LoggerSetupTest.java:42)
 ```
 
 The file output includes the log sequence number, two letters from the log level, class name, method name, thread name, log message, and 3 lines from the stack trace if appropriate, all followed by a newline. 

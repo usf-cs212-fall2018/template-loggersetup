@@ -1,10 +1,10 @@
-[1 TR] LoggerSetup.logMessages main: tucan 
-[2 DE] LoggerSetup.logMessages main: dodo 
-[3 IN] LoggerSetup.logMessages main: ibis 
-[4 WA] LoggerSetup.logMessages main: wren 
-[5 ER] LoggerSetup.logMessages main: egret java.lang.Exception: urk
-	at LoggerSetup.logMessages(LoggerSetup.java:13)
-	at LoggerSetup.main(LoggerSetup.java:18)
-[6 FA] LoggerSetup.logMessages main: finch java.lang.Exception: ack
-	at LoggerSetup.logMessages(LoggerSetup.java:14)
-	at LoggerSetup.main(LoggerSetup.java:18)
+[1 TR] LoggerSetup.main main: tucan 
+[2 DE] LoggerSetup.main main: dodo 
+[3 IN] LoggerSetup.main main: ibis 
+[4 WA] LoggerSetup.main main: wren 
+[5 ER] LoggerSetup.main main: egret java.lang.Exception: urk
+	at LoggerSetup.main(LoggerSetup.java:13)
+	at LoggerSetupTest.setup(LoggerSetupTest.java:42)
+[6 FA] LoggerSetup.main main: finch java.lang.Exception: ack
+	at LoggerSetup.main(LoggerSetup.java:14)
+	at LoggerSetupTest.setup(LoggerSetupTest.java:42)
