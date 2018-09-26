@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
  * learn about how to handle stack trace output.
  */
 
-public class Log4j2SetupTest {
+public class LoggerSetupTest {
 
 	private ByteArrayOutputStream capture;
 
@@ -40,7 +40,7 @@ public class Log4j2SetupTest {
 
 		// run logMessages() only ONCE to avoid duplicate entries
 		// and shutdown log manager to flush the debug files
-		Log4j2Setup.logMessages();
+		LoggerSetup.logMessages();
 		LogManager.shutdown();
 
 		// restore system.out
