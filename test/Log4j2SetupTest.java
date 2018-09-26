@@ -1,3 +1,6 @@
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -6,9 +9,9 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 
 /*
  * NOTE:
@@ -23,17 +26,17 @@ import org.junit.Test;
 
 public class Log4j2SetupTest {
 
-	private static ByteArrayOutputStream capture;
+	private ByteArrayOutputStream capture;
 
-	@BeforeClass
-	public static void setup() throws IOException {
+	@BeforeEach
+	public void setup() throws IOException {
 		// delete any old debug files
 		Files.deleteIfExists(Paths.get("debug.log"));
 
 		// capture all system console output
 		PrintStream original = System.out;
-		capture = new ByteArrayOutputStream();
-		System.setOut(new PrintStream(capture));
+		this.capture = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(this.capture));
 
 		// run logMessages() only ONCE to avoid duplicate entries
 		// and shutdown log manager to flush the debug files
@@ -42,7 +45,7 @@ public class Log4j2SetupTest {
 
 		// restore system.out
 		System.setOut(original);
-		System.out.println(capture.toString());
+		System.out.println(this.capture.toString());
 	}
 
 	@Test
@@ -50,7 +53,7 @@ public class Log4j2SetupTest {
 		// test file output is as expected
 		List<String> expected = Files.readAllLines(Paths.get("test", "debug.log"));
 		List<String> actual = Files.readAllLines(Paths.get("debug.log"));
-		Assert.assertTrue("Compare debug.log and test/debug.log in Eclipse.", expected.equals(actual));
+		assertTrue(expected.equals(actual), "Compare debug.log and test/debug.log in Eclipse.");
 	}
 
 	/*
@@ -67,42 +70,42 @@ public class Log4j2SetupTest {
 	@Test
 	public void testExceptionOutput() throws IOException {
 		// tests your console output looks right
-		Assert.assertFalse(capture.toString().contains("java.lang.Exception"));
+		assertFalse(this.capture.toString().contains("java.lang.Exception"));
 	}
 
 	@Test
 	public void testLevelOutput1() {
 		// tests your console output looks right
-		Assert.assertFalse(capture.toString().contains("dodo"));
+		assertFalse(this.capture.toString().contains("dodo"));
 	}
 
 	@Test
 	public void testLevelOutput2() {
 		// tests your console output looks right
-		Assert.assertFalse(capture.toString().contains("tucan"));
+		assertFalse(this.capture.toString().contains("tucan"));
 	}
 
 	@Test
 	public void testLevelOutput3() {
 		// tests your console output looks right
-		Assert.assertTrue(capture.toString().contains("ibis"));
+		assertTrue(this.capture.toString().contains("ibis"));
 	}
 
 	@Test
 	public void testLevelOutput4() {
 		// tests your console output looks right
-		Assert.assertTrue(capture.toString().contains("wren"));
+		assertTrue(this.capture.toString().contains("wren"));
 	}
 
 	@Test
 	public void testLevelOutput5() {
 		// tests your console output looks right
-		Assert.assertTrue(capture.toString().contains("egret urk"));
+		assertTrue(this.capture.toString().contains("egret urk"));
 	}
 
 	@Test
 	public void testLevelOutput6() {
 		// tests your console output looks right
-		Assert.assertTrue(capture.toString().contains("finch ack"));
+		assertTrue(this.capture.toString().contains("finch ack"));
 	}
 }
